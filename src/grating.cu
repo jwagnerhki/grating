@@ -878,10 +878,9 @@ __global__ void CopyDataForFFT(char4 *pc4Data,
 {
     int i = (blockIdx.x * blockDim.x) + threadIdx.x;
 
-    pf4FFTIn[i].x = (float) pc4Data[i].x;
-    pf4FFTIn[i].y = (float) pc4Data[i].y;
-    pf4FFTIn[i].z = (float) pc4Data[i].z;
-    pf4FFTIn[i].w = (float) pc4Data[i].w;
+    char4  in  = pc4Data[i];
+    float4 out = { (float)in.x, (float)in.y, (float)in.z, (float)in.w };
+    pf4FFTIn[i] = out;
 
     return;
 }
